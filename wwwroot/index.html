@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MusicPlatform</title>
+    <link rel="stylesheet" href="app.css" />
+</head>
+<body>
+    <header class="toolbar">
+        <span class="brand">MusicPlatform</span>
+        <nav>
+            <div class="dropdown" id="languageDropdown">
+                <button type="button" class="dropdown-toggle" id="languageButton" aria-haspopup="true" aria-expanded="false">
+                    <img id="currentFlag" src="/images/flag-da.svg" alt="" />
+                    <span id="currentLanguageText">Dansk</span> &#9662;
+                </button>
+                <ul class="dropdown-menu" id="languageMenu" hidden>
+                    <li><button type="button" data-language="da"><img src="/images/flag-da.svg" alt="" /> Dansk</button></li>
+                    <li><button type="button" data-language="en"><img src="/images/flag-en.svg" alt="" /> English</button></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container">
+        <!-- komponent 1: titel (renderes ud fra sprog i session) -->
+        <h1 id="pageTitle"></h1>
+
+        <!-- komponent 2: dropdown til tabeller -->
+        <label for="tableSelect">Tabel / Table</label>
+        <select id="tableSelect">
+            <option value="">-- Select table --</option>
+        </select>
+
+        <!-- komponent 3: partial view: den valgte tabel -->
+        <section id="tableContainer"></section>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
