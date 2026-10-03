@@ -850,28 +850,6 @@ async function loadSongs() {
     }
 }
 
-// async function loadSongs() {
-
-//     try {
-
-//         const response = await fetch(`${apiBaseUrl}/api/songs`);
-
-//         if (!response.ok) {
-
-//             const errorText = await response.text();
-
-//             throw new Error(errorText || 'Error loading songs.');
-//         }
-
-//         const songs = await response.json();
-
-//         applySongSearchAndFilters(songs);
-//     }
-//     catch (error) {
-//         renderError(songContainer, error.message);
-//     }
-// }
-
 
 // ************************************************************
 // 18. DELETE SONG
