@@ -152,7 +152,97 @@
             </div>
 
 
+            <div class="song-filters">
+
+                <span class="filter-label">
+                    Search in:
+                </span>
+
+
+                <button type="button"
+                        class="filter-button"
+                        data-filter="title">
+                    Title
+                </button>
+
+
+                <button type="button"
+                        class="filter-button"
+                        data-filter="artist">
+                    Artist
+                </button>
+
+
+                <button type="button"
+                        class="filter-button"
+                        data-filter="album">
+                    Album
+                </button>
+
+
+                <button type="button"
+                        class="filter-button"
+                        data-filter="YouTube">
+                    YouTube
+                </button>
+
+
+                <button type="button"
+                        class="filter-button"
+                        data-filter="Spotify">
+                    Spotify
+                </button>
+
+
+                <button type="button"
+                        class="filter-button"
+                        data-filter="SoundCloud">
+                    SoundCloud
+                </button>
+
+            </div>
+
+
+            <div class="song-sort">
+
+                <label for="songSort">
+                    Sort by:
+                </label>
+
+
+                <select id="songSort">
+
+                    <option value="none">None</option>
+
+                    <option value="title-asc">Title A-Z</option>
+
+                    <option value="title-desc">
+                        Title Z-A
+                    </option>
+
+                    <option value="artist-asc">
+                        Artist A-Z
+                    </option>
+
+                    <option value="artist-desc">
+                        Artist Z-A
+                    </option>
+
+                    <option value="album-asc">
+                        Album A-Z
+                    </option>
+
+                    <option value="album-desc">
+                        Album Z-A
+                    </option>
+
+                </select>
+
+            </div>
+
+
             <div id="songContainer"></div>
+
 
         </section>
 
@@ -379,303 +469,3 @@
 
 </body>
 </html>
-
-
-<!--<!DOCTYPE html>
-<html lang="da">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MusicPlatform</title>
-    <link rel="stylesheet" href="app.css" />
-</head>
-<body>-->
-<!-- =====================================================
-     TOP TOOLBAR
-     ===================================================== -->
-<!--<header class="toolbar">
-
-    <span class="brand">
-        MusicPlatform
-    </span>
-
-    <nav>
-        <div class="dropdown" id="languageDropdown">
-
-            <button type="button"
-                    class="dropdown-toggle"
-                    id="languageButton"
-                    aria-haspopup="true"
-                    aria-expanded="false">
-
-                <img id="currentFlag"
-                     src="/images/flag-da.svg"
-                     alt="" />
-
-                <span id="currentLanguageText">
-                    Dansk
-                </span>
-
-                &#9662;
-            </button>
-
-            <ul class="dropdown-menu"
-                id="languageMenu"
-                hidden>
-
-                <li>
-                    <button type="button"
-                            data-language="da">
-
-                        <img src="/images/flag-da.svg"
-                             alt="" />
-
-                        Dansk
-                    </button>
-                </li>
-
-                <li>
-                    <button type="button"
-                            data-language="en">
-
-                        <img src="/images/flag-en.svg"
-                             alt="" />
-
-                        English
-                    </button>
-                </li>
-
-            </ul>
-
-        </div>
-    </nav>
-
-</header>-->
-<!-- =====================================================
-     MAIN CONTENT
-     ===================================================== -->
-<!--<main class="container">-->
-<!-- Titel -->
-<!--<h1 id="pageTitle"></h1>-->
-<!-- =================================================
- MASTER
- Table selector
- ================================================= -->
-<!--<label for="tableSelect">
-    Tabel / Table
-</label>
-
-<select id="tableSelect">
-    <option value="">
-        -- Select table --
-    </option>
-</select>-->
-<!-- =================================================
- DETAIL
- Selected table
- ================================================= -->
-<!--<section id="tableContainer"></section>-->
-<!-- Song administration -->
-<!--<section id="songAdmin">
-        <h2>Songs</h2>
-
-        <div class="song-toolbar">
-            <input type="search"
-                   id="songSearch"
-                   placeholder="Search songs..." />
-
-            <button type="button"
-                    id="loadSongsButton">
-                Load songs
-            </button>
-
-            <button type="button"
-                    id="addSongButton">
-                Add song
-            </button>
-        </div>
-
-        <div id="songContainer"></div>
-    </section>
-
-
-</main>-->
-<!-- =====================================================
-     CRUD MODAL
-
-     Der findes kun denne CRUD-formular.
-     Den bruges til:
-     - Insert
-     - Update
-
-     Delete sker via knappen på rækken.
-     ===================================================== -->
-<!--<div id="crudModal"
-     class="modal"
-     hidden>
-
-    <div class="modal-content">
-
-        <div class="modal-header">
-
-            <h2 id="modalTitle"></h2>
-
-            <button type="button"
-                    id="closeModalButton"
-                    aria-label="Luk">
-                ×
-            </button>
-
-        </div>
-
-
-        <form id="crudForm">-->
-<!-- Felterne bliver oprettet dynamisk af JavaScript -->
-<!--<div id="formFields"></div>
-
-
-            <div class="modal-actions">
-
-                <button type="submit"
-                        id="saveButton">
-                    Gem
-                </button>
-
-                <button type="button"
-                        id="cancelButton">
-                    Annuller
-                </button>
-
-            </div>
-
-        </form>
-
-    </div>
-
-</div>-->
-<!-- =====================================================
- ADD SONG MODAL
- ===================================================== -->
-<!--<div id="songModal"
-     class="modal"
-     hidden>
-
-    <div class="modal-content">
-
-        <div class="modal-header">
-
-            <h2>Add song</h2>
-
-            <button type="button"
-                    id="closeSongModalButton"
-                    aria-label="Luk">
-                ×
-            </button>
-
-        </div>
-
-
-        <form id="songForm">-->
-<!-- =============================================
-     BASIC INFORMATION
-     ============================================= -->
-<!--<div class="form-field">
-
-    <label for="songTitle">
-        Title
-    </label>
-
-    <input type="text"
-           id="songTitle"
-           name="title"
-           required />
-
-</div>
-
-
-<div class="form-field">
-
-    <label for="songMainArtist">
-        Main artist
-    </label>
-
-    <input type="text"
-           id="songMainArtist"
-           name="mainArtist"
-           required />
-
-</div>-->
-<!-- =============================================
-     FEATURED ARTISTS
-     ============================================= -->
-<!--<div class="song-form-section">
-
-    <h3>Featured artists</h3>
-
-    <div id="featuredArtistsContainer"></div>
-
-    <button type="button"
-            id="addFeaturedArtistButton">
-        Add featured artist
-    </button>
-
-</div>-->
-<!-- =============================================
-     ALBUMS
-     ============================================= -->
-<!--<div class="song-form-section">
-
-    <h3>Albums</h3>
-
-    <div id="albumsContainer"></div>
-
-    <button type="button"
-            id="addAlbumButton">
-        Add album
-    </button>
-
-</div>-->
-<!-- =============================================
-     MEDIA
-     ============================================= -->
-<!--<div class="song-form-section">
-
-    <h3>Media</h3>
-
-    <div id="mediaContainer"></div>
-
-    <button type="button"
-            id="addMediaButton">
-        Add media
-    </button>
-
-</div>-->
-<!-- =============================================
-     ACTIONS
-     ============================================= -->
-<!--<div class="modal-actions">
-
-                <button type="submit"
-                        id="saveSongButton">
-                    Save
-                </button>
-
-                <button type="button"
-                        id="cancelSongButton">
-                    Cancel
-                </button>
-
-            </div>
-
-        </form>
-
-    </div>
-
-</div>-->
-<!-- =====================================================
-     JAVASCRIPT
-     ===================================================== -->
-<!--<script src="app.js"></script>
-
-</body>
-</html>-->
