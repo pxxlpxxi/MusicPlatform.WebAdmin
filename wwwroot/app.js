@@ -620,7 +620,7 @@ crudForm.addEventListener(
             closeModal();
 
             await loadTable(tableName);
-            await loadDatabaseStatus();
+            await loadDatabaseStatus(apiBaseUrl);
 
             tableSelect.value = tableName;
         }
@@ -664,7 +664,7 @@ async function deleteRow(tableName, primaryKeyValue) {
         }
 
         await loadTable(tableName);
-        await loadDatabaseStatus();
+        await loadDatabaseStatus(apiBaseUrl);
 
         tableSelect.value = tableName;
     }
@@ -683,11 +683,8 @@ async function deleteRow(tableName, primaryKeyValue) {
 function renderError(container, message) {
 
     const p = document.createElement('p');
-
     p.className = 'error';
-
     p.textContent = message;
-
     container.replaceChildren(p);
 }
 

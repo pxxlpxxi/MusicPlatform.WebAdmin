@@ -129,7 +129,7 @@ export async function initializeLanguageSelector() {
                         renderLanguage(state);
                     }
                     catch (error) {
-                        renderError(error);
+                        throw new Error(error.message);
                     }
 
                     languageMenu.hidden = true;

@@ -4,7 +4,7 @@
 // 5.1 DATABASE STATUS CUSTOM CONTROL
 // ************************************************************
 
-export async function loadDatabaseStatus(apiBaseUrl, databaseStatus, renderError) {
+export async function loadDatabaseStatus(apiBaseUrl) {
 
     try {
 
@@ -16,12 +16,12 @@ export async function loadDatabaseStatus(apiBaseUrl, databaseStatus, renderError
         }
 
         const status = await response.json();
-
         renderDatabaseStatus(status);
     }
     catch (error) {
 
-        renderError(databaseStatus, error.message);
+        throw new Error(error);
+        // renderError(databaseStatus, error.message);
     }
 }
 
