@@ -1716,8 +1716,6 @@ async function initialize() {
     }
 }
 
-
-
 window.addEventListener('beforeunload', () => {
     stopDatabaseStatusUpdates();
 });
