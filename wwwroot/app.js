@@ -21,22 +21,21 @@
 // 1. DOM REFERENCES
 // ************************************************************
 
-const languageLabels = {
-    da: 'Dansk',
-    en: 'English'
-};
+import {
+    initializeLanguageSelector,
+    loadLanguage
+} from './Pages/PartialView/languageSelector.js';
+
+import {
+    loadDatabaseStatus,
+    startDatabaseStatusUpdates,
+    stopDatabaseStatusUpdates
+} from './Pages/CustomControls/databaseStatus.js';
 
 const pageTitle = document.getElementById('pageTitle');
-
 const tableSelect = document.getElementById('tableSelect');
-
 const tableContainer = document.getElementById('tableContainer');
-
 const databaseStatus = document.getElementById('databaseStatus');
-
-const languageButton = document.getElementById('languageButton');
-
-const languageMenu = document.getElementById('languageMenu');
 
 
 // **********************************************************
@@ -44,15 +43,10 @@ const languageMenu = document.getElementById('languageMenu');
 // ************************************************************
 
 const crudModal = document.getElementById('crudModal');
-
 const crudForm = document.getElementById('crudForm');
-
 const modalTitle = document.getElementById('modalTitle');
-
 const formFields = document.getElementById('formFields');
-
 const closeModalButton = document.getElementById('closeModalButton');
-
 const cancelButton = document.getElementById('cancelButton');
 
 
@@ -61,15 +55,10 @@ const cancelButton = document.getElementById('cancelButton');
 // ************************************************************
 
 const songSearch = document.getElementById('songSearch');
-
 const loadSongsButton = document.getElementById('loadSongsButton');
-
 const addSongButton = document.getElementById('addSongButton');
-
 const songContainer = document.getElementById('songContainer');
-
 const songSort = document.getElementById('songSort');
-
 const filterButtons = document.querySelectorAll('.filter-button');
 
 // ************************************************************
@@ -120,13 +109,9 @@ const addMediaButton = document.getElementById(
 let apiBaseUrl = '';
 
 let currentTable = null;
-
 let currentRow = null;
-
 let currentSong = null;
-
 let currentMode = null;
-
 let currentSongId = null;
 let activeSongFilters = [];
 let databaseStatusInterval = null;
@@ -150,129 +135,6 @@ async function loadConfig() {
 }
 
 // ************************************************************
-// 4. LANGUAGE
-// ************************************************************
-
-function renderLanguage(state) {
-
-    pageTitle.textContent = state.title;
-
-    document.documentElement.lang = state.language;
-
-    document.getElementById('currentFlag')
-        .src = `/images/flag-${state.language}.svg`;
-
-    document.getElementById('currentLanguageText')
-        .textContent = languageLabels[state.language];
-}
-
-async function loadLanguage() {
-
-    const response = await fetch('/api/language');
-
-    if (!response.ok) {
-
-        throw new Error('Could not load language.');
-    }
-
-    const state = await response.json();
-
-    renderLanguage(state);
-}
-
-
-// ************************************************************
-// Language dropdown
-// ************************************************************
-
-languageButton.addEventListener(
-    'click',
-    event => {
-        event.stopPropagation();
-
-        languageMenu.hidden = !languageMenu.hidden;
-
-        languageButton.setAttribute(
-            'aria-expanded',
-            String(!languageMenu.hidden)
-        );
-    }
-);
-
-
-document.addEventListener(
-    'click',
-    event => {
-
-        const languageDropdown = document.getElementById(
-            'languageDropdown');
-
-        if (!languageDropdown.contains(event.target)) {
-            languageMenu.hidden = true;
-
-            languageButton.setAttribute(
-                'aria-expanded',
-                'false'
-            );
-        }
-    }
-);
-
-
-// ************************************************************
-// Language selection
-// ************************************************************
-
-languageMenu
-    .querySelectorAll('button[data-language]')
-    .forEach(button => {
-
-        button.addEventListener(
-            'click',
-            async () => {
-
-                try {
-
-                    const response = await fetch(
-                        '/api/language',
-                        {
-                            method: 'POST',
-                            headers:
-                            {
-                                'Content-Type': 'application/json'
-                            },
-
-                            body:
-                                JSON.stringify
-                                    ({
-                                        language:
-                                            button.dataset.language
-                                    })
-                        }
-                    );
-
-
-                    if (!response.ok) {
-
-                        throw new Error('Could not change language.');
-                    }
-
-                    const state = await response.json();
-
-                    renderLanguage(state);
-                }
-                catch (error) {
-                    renderError(tableContainer, error.message);
-                }
-
-                languageMenu.hidden = true;
-
-                languageButton.setAttribute('aria-expanded', 'false');
-            }
-        );
-    });
-
-// ************************************************************
 // 5. LOAD TABLE NAMES
 // ************************************************************
 
@@ -294,90 +156,6 @@ async function loadTableNames() {
         tableSelect.add(new Option(name, name));
     }
 }
-
-// ************************************************************
-// 5.1 DATABASE STATUS CUSTOM CONTROL
-// ************************************************************
-
-async function loadDatabaseStatus() {
-
-    try {
-
-        const response = await fetch(`${apiBaseUrl}/api/tables/status`);
-
-        if (!response.ok) {
-
-            throw new Error('Error loading database status.');
-        }
-
-        const status = await response.json();
-
-        renderDatabaseStatus(status);
-    }
-    catch (error) {
-
-        renderError(databaseStatus, error.message);
-    }
-}
-
-//tag imod status-objektet fra API'et og opret DOM-elementer til at vise database-status. /overtæt til html
-// databaseStatus
-//        │
-//        ├── henter data
-//        ├── modtager database - status
-//        ├── renderer status
-//        └── kan opdateres igen
-
-
-function renderDatabaseStatus(status) {
-
-    databaseStatus.replaceChildren();
-
-    const heading = document.createElement('span');
-    heading.className = 'database-status-heading';
-    heading.textContent = 'Database status';
-
-    databaseStatus.appendChild(heading);
-
-
-    const tableCount = document.createElement('span');
-    tableCount.className = 'database-status-count';
-    tableCount.textContent = `Tables: ${status.tableCount}`;
-
-    databaseStatus.appendChild(tableCount);
-
-
-    for (const table of status.tables) {
-
-        const item = document.createElement('span');
-        item.className = 'database-status-table';
-
-        item.textContent =
-            `${table.name}: ${table.rowCount} rows`;
-
-        databaseStatus.appendChild(item);
-    }
-}
-
-
-//hvert 5. sekund opdateres database-status via
-//loadDatabaseStatus - funktionen. bruger ser altid den nyeste status for databasen uden at skulle opdatere siden manuelt.
-//loadDatabaseStatus() -> GET /api/tables/status -> renderDatabaseStatus(status)
-function startDatabaseStatusUpdates() {
-    
-    databaseStatusInterval = setInterval(loadDatabaseStatus, 5000);
-}
-
-// application/page lukkes -> before unload event -> clearInterval(databaseStatusInterval) for at stoppe opdateringen af database-status.
-window.addEventListener('beforeunload', () => {
-
-    if (databaseStatusInterval !== null) {
-
-        clearInterval(databaseStatusInterval);
-        databaseStatusInterval = null;
-    }
-});
-
 
 
 // ************************************************************
@@ -1924,13 +1702,13 @@ songForm.addEventListener('submit', async event => {
 async function initialize() {
 
     try {
-
+        await initializeLanguageSelector();
         await loadConfig();
         await loadLanguage();
         await loadTableNames();
-        await loadDatabaseStatus();
 
-        startDatabaseStatusUpdates();
+        await loadDatabaseStatus(apiBaseUrl);
+        startDatabaseStatusUpdates(apiBaseUrl);
 
     } catch (error) {
 
@@ -1939,6 +1717,10 @@ async function initialize() {
 }
 
 
-// start applikationen.
 
+window.addEventListener('beforeunload', () => {
+    stopDatabaseStatusUpdates();
+});
+
+// start applikationen.
 initialize();

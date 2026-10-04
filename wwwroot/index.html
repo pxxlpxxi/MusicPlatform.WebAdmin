@@ -17,71 +17,10 @@
 
     <header class="toolbar">
 
-        <span class="brand">
-            MusicPlatform
-        </span>
+        <span class="brand">MusicPlatform</span>
 
         <nav>
-
-            <div class="dropdown"
-                 id="languageDropdown">
-
-                <button type="button"
-                        class="dropdown-toggle"
-                        id="languageButton"
-                        aria-haspopup="true"
-                        aria-expanded="false">
-
-                    <img id="currentFlag"
-                         src="/images/flag-da.svg"
-                         alt="" />
-
-                    <span id="currentLanguageText">
-                        Dansk
-                    </span>
-
-                    &#9662;
-
-                </button>
-
-
-                <ul class="dropdown-menu"
-                    id="languageMenu"
-                    hidden>
-
-                    <li>
-
-                        <button type="button"
-                                data-language="da">
-
-                            <img src="/images/flag-da.svg"
-                                 alt="" />
-
-                            Dansk
-
-                        </button>
-
-                    </li>
-
-
-                    <li>
-
-                        <button type="button"
-                                data-language="en">
-
-                            <img src="/images/flag-en.svg"
-                                 alt="" />
-
-                            English
-
-                        </button>
-
-                    </li>
-
-                </ul>
-
-            </div>
-
+            <div id="languageSelector"></div>
         </nav>
 
     </header>
@@ -475,7 +414,7 @@
          JAVASCRIPT
          ===================================================== -->
 
-    <script src="app.js"></script>
+    <script type="module" src="app.js"></script>
 
 </body>
 </html>
