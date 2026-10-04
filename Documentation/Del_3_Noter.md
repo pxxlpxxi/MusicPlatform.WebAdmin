@@ -40,9 +40,7 @@ Eksempel:
 ```
 Database status    Tables: 8
 
-Album: 21 rows    AlbumSong: 25 rows    Artist: 24 rows
-Media: 30 rows    MediaType: 1 rows     Song: 30 rows
-SongArtist: 31 rows    User: 2 rows
+Album: 21 rows    AlbumSong: 25 rows    Artist: 24 rows    Media: 30 rows    MediaType: 1 rows     Song: 30 rows    SongArtist: 31 rows    User: 2 rows
 ```
 Asynkron hentning
 Database-statussen hentes asynkront med `fetch()`:
